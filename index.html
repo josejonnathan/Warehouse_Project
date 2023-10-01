@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="CSS/Styles.css" />
+    <title>Origin Warehouse Solutions</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          src="../Warehouse_Project/Images/Warehouse logo Favicon.png"
+          alt="Logo"
+        />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Link1</a></li>
+          <li><a href="#">Link2</a></li>
+          <li><a href="#">Link3</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top">⇡</button>
+
+    <script>
+      let mybutton = document.getElementById("myBtn");
+
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+
+    <div class="hero-image">
+      <div class="hero-box">
+        <div class="hero-header">
+          <img
+            src="../Warehouse_Project/Images/Warehouse logo full 300.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+    <div class="separators">
+      <h2 class="separators">OWS</h2>
+      <p>
+        <em>
+          OWS (Origin Warehouse Solutions) is a complette solution for your
+          inventory
+        </em>
+      </p>
+    </div>
+
+    <div id="experience" class="container">
+      <div class="box">
+        <div class="inboxtitle">User Control</div>
+        <img
+          class="inboximg"
+          src="Images/User control.jpg"
+          alt="Music Production photo"
+        />
+        <div class="inboxtext">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit
+          totam saepe quaerat, atque voluptate unde quas harum quidem alias
+          voluptatibus placeat iusto, praesentium adipisci, vitae illo natus
+          assumenda iure eum!
+        </div>
+      </div>
+      <div class="box">
+        <div class="inboxtitle">Stock and inventory</div>
+        <img
+          class="inboximg"
+          src="Images/inventory.jpg"
+          alt="Film Post Photo"
+        />
+        <div class="inboxtext">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis
+          corrupti nesciunt quod odit quaerat, excepturi odio, facere libero
+          neque eos sapiente dolorem dolorum molestiae repellat nostrum, ducimus
+          quam numquam voluptas!
+        </div>
+      </div>
+      <div class="box">
+        <div class="inboxtitle">Order Management</div>
+        <img class="inboximg" src="Images/orders.jpg" alt="Video Games Photo" />
+        <div class="inboxtext">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate
+          expedita est fugiat provident et! Veniam ut laborum in adipisci rem
+          facilis fugit numquam officia repudiandae. Numquam iusto neque
+          molestiae voluptatibus.
+        </div>
+      </div>
+      <div class="box">
+        <div class="inboxtitle">Reporting</div>
+        <img class="inboximg" src="Images/report.jpg" alt="Live Sound Photo" />
+        <div class="inboxtext">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+          sapiente, fuga, quidem soluta voluptatibus quod minima facilis ea
+          tempore dolores provident voluptatum illum molestiae ad iste quisquam
+          eum? Similique, exercitationem!
+        </div>
+      </div>
+    </div>
+    <div class="footer"><p>© Jonnathan Gonzalez - 2023</p></div>
+  </body>
+</html>
