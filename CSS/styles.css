@@ -4,7 +4,7 @@ body{
     font-family: 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif;
     padding: 0;
     margin: 0;
-    background-color: azure;
+    background-color: rgb(255, 255, 255);
   }
   /* To Top Button */
   #myBtn {
@@ -20,17 +20,17 @@ body{
       background-color: rgba(105, 169, 148, 0);
       cursor: pointer;
       padding: 15px;
-      border-radius: 30px;
+      border-radius: 40px;
       transition: all .3s;
   }
   #myBtn:hover {
-      background-color: rgb(11, 50, 113);
+      background-color: rgb(15, 62, 138);
       color: rgb(255, 255, 255);
       border: none
   }
   /* Navigation Menu */
   header {
-    background-color:  rgb(227, 227, 227);
+    background-color:  rgb(255, 255, 255);
     color: #ffffff;
     display: flex;
     justify-content: space-evenly;
@@ -233,7 +233,40 @@ th {
       font-style: normal;
       scale: 1.1;
   }
-  /* Footer */
+
+  
+  
+/* Contact form{ */
+
+  
+  .container-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #c8c8c8;
+    padding: 20px;
+  }
+  input[type=text], select, textarea {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */ 
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+  
+  input[type=submit] {
+    background-color: rgb(11, 50, 113);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+/* Footer */
   .footer {
       display: flex;
       flex-flow: wrap;

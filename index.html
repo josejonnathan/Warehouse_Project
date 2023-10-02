@@ -7,6 +7,7 @@
     <title>Origin Warehouse Solutions</title>
   </head>
   <body>
+    <!-- Menu -->
     <header>
       <div class="logo">
         <img
@@ -16,14 +17,16 @@
       </div>
       <nav>
         <ul>
+          <li><a href="#About">About</a></li>
           <li><a href="#Features">Features</a></li>
           <li><a href="#Comparision">Comparision</a></li>
           <li><a href="#Clients">Clients</a></li>
+          <li><a href="#Contact">Contact</a></li>
         </ul>
       </nav>
     </header>
-
-    <button onclick="topFunction()" id="myBtn" title="Go to top">⇡</button>
+    <!-- To top Button -->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">⌅</button>
 
     <script>
       let mybutton = document.getElementById("myBtn");
@@ -60,7 +63,7 @@
       </div>
     </div>
     <!-- Resume -->
-    <div class="separators">
+    <div id="About" class="separators">
       <h2 class="separators">OWS</h2>
       <p>
         <em>
@@ -136,7 +139,7 @@
           <th>Others</th>
         </tr>
         <tr>
-          <td>Monthly and full licence based</td>
+          <td>Monthly and Full Licence Based</td>
           <td>✔</td>
           <td>✘</td>
         </tr>
@@ -187,15 +190,63 @@
       <h2>Our Clients</h2>
     </div>
     <div class="social">
-      <img src="../Warehouse_Project/Images/tortilleria.png" alt="" />
-      <img src="../Warehouse_Project/Images/lambo.png" alt="" />
-      <img src="../Warehouse_Project/Images/microsoft.png" alt="" />
-      <img src="../Warehouse_Project/Images/apple.png" alt="" />
+      <img
+        src="../Warehouse_Project/Images/tortilleria.png"
+        alt="Tortilleria"
+      />
+      <img src="../Warehouse_Project/Images/lambo.png" alt="Lamborghini" />
+      <img src="../Warehouse_Project/Images/microsoft.png" alt="Microsoft" />
+      <img src="../Warehouse_Project/Images/apple.png" alt="Apple" />
     </div>
     <div class="social">
-      <img src="../Warehouse_Project/Images/nasa.png" alt="" />
-      <img src="../Warehouse_Project/Images/Coca Cola.png" alt="" />
-      <img src="../Warehouse_Project/Images/pepsi.png" alt="" />
+      <img src="../Warehouse_Project/Images/nasa.png" alt="NASA" />
+      <img
+        src="../Warehouse_Project/Images/Terra.png"
+        alt="Flat Earth Society"
+      />
+      <img src="../Warehouse_Project/Images/Coca Cola.png" alt="Coca Cola" />
+      <img src="../Warehouse_Project/Images/pepsi.png" alt="Pepsi" />
+    </div>
+    <!-- Contact -->
+    <div id="Contact" class="separators">
+      <h2>Talk with Us</h2>
+    </div>
+    <!-- contact form -->
+    <div class="container-contact">
+      <form action="action_page.php">
+        <label for="fname">First Name</label>
+        <input
+          type="text"
+          id="fname"
+          name="firstname"
+          placeholder="Your name.."
+        />
+
+        <label for="lname">Last Name</label>
+        <input
+          type="text"
+          id="lname"
+          name="lastname"
+          placeholder="Your last name.."
+        />
+
+        <label for="country">Country</label>
+        <select id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+
+        <label for="subject">Subject</label>
+        <textarea
+          id="subject"
+          name="subject"
+          placeholder="Write something.."
+          style="height: 200px"
+        ></textarea>
+
+        <input type="submit" value="Submit" />
+      </form>
     </div>
     <!-- Footer -->
     <div class="footer">
