@@ -2,6 +2,10 @@
 
 This is a Warehouse Management System developed by https://github.com/josejonnathan
 
+# Developing info
+
+Developed under python 3.11.4
+
 # Features
 
 The following describes the basic features of this App
