@@ -1,6 +1,7 @@
 # Warehouse_Project
 
 This is a Warehouse Management System developed by https://github.com/josejonnathan
+Website https://josejonnathan.github.io/Warehouse_Project/
 
 # Developing info
 
