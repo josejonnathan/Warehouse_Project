@@ -1,5 +1,52 @@
-from data import stock
-from datetime import datetime, timedelta
+from data import stock, personnel
+from datetime import datetime
+
+# Initial Variables
+# Sumary
+search_history = list()
+listed_categories = list()
+listed_items = 0
+# Item Variable
+item = ''
+
+# User Validator
+
+
+def validator(func):
+    def wrapper(*args, **kwargs):
+        print("Autentication required.")
+        user = username
+        passwd = input("Provide your Password: ")
+
+        # autentication
+        if authenticate(user, passwd):
+            return func(*args, **kwargs)
+        else:
+            print("Invalid Username or Password, Access Denied")
+            farewell(username, total_listed)
+    return wrapper
+
+
+# user autenticator
+
+
+def authenticate(user, password, users=personnel):
+    for user_info in users:
+        if user_info["user_name"] == user and user_info.get("password") == password:
+            return True
+        if "head_of" in user_info:
+            if authenticate(user, password, user_info["head_of"]):
+                return True
+    return False
+
+
+# Getting user
+
+
+def get_user():
+    username = input("Introduce your name: ")
+    return username
+
 
 # Gretting and Menu
 
@@ -18,24 +65,27 @@ Please select one of the following options
     user_selection = str(input("Write your selection: "))
     user_interaction(user_selection)
 
+
 # Choose the path to follow based on user_selection
 
 
 def user_interaction(sel):
+
     if sel == "1":
         print_all()
     elif sel == "2":
         search_result = search_item(retrive_item())
         order_request = result_eval(search_result)
-        order(order_request)
+        order_sel(order_request)
     elif sel == "3":
         category_list(stock)
     elif sel == "4":
-        farewell(username)
+        summary(username)
         exit()
     else:
         print(f"{sel} is not a valid operation.")
         farewell(username)
+
 
 # Printing categories
 
@@ -55,8 +105,12 @@ def category_list(items):
     category_expand(category_menu, items)
 
 
+# Expanded categories
+
+
 def category_expand(categories, items):
     cat_selection = int(input("Type the number of the category to browse: "))
+    listed_categories.append(categories[cat_selection][0])
     print(f'List of {categories[cat_selection][0]} available:\n')
     for item in items:
         if item["category"] == categories[cat_selection][0]:
@@ -67,33 +121,44 @@ def category_expand(categories, items):
     print("*" * 30)
     farewell(username)
 
+
 # Getting the item from user
 
 
 def retrive_item():
     selected_item = input("Please introduce the item you are looking for: ")
+    search_history.append(selected_item)
     selected_item = selected_item.title()
+    global item
+    item = selected_item
     return selected_item
+
 
 # Print all the items of both Warehouses
 
 
 def print_all():
-    warehouse1_count = 0
-    warehouse2_count = 0
+    warehouse_count = dict()
+
     print("Items available are:\n")
     for item in stock:
-        print(item,)
-        if item["warehouse"] == 1:
-            warehouse1_count += 1
-        elif item["warehouse"] == 2:
-            warehouse2_count += 1
+        print(item)
+        if item["warehouse"] in warehouse_count:
+            warehouse_count[item["warehouse"]] += 1
+        else:
+            warehouse_count[item["warehouse"]] = 1
     print("\n")
-    print("Total items in warehouse 1: ", warehouse1_count, "\n")
-    print("Total items in warehouse 2: ", warehouse2_count, "\n")
+    for key, val in warehouse_count.items():
+
+        print(f"Items in Warehouse {key}: {val}")
+    global total_listed
+    total_listed += sum(warehouse_count.values())
+    farewell(username)
 
 
 # Search the number of ocurrences of the item
+
+
 def search_item(item):
     print(f"Searching for {item}...")
     search_result = list()
@@ -106,6 +171,7 @@ def search_item(item):
         else:
             pass
     return (search_result)
+
 
 # Timedelta
 
@@ -121,73 +187,91 @@ def time_delta(d1):
 
 def result_eval(result_dict):
     # counting availability by warehouse
-    result = [0, 0]
+    result = dict()
     for item in result_dict:
-        if item["location"] == 1:
-            result[0] += 1
+        if item["location"] in result:
+            result[item["location"]] += 1
         else:
-            result[1] += 1
+            result[item["location"]] = 1
+    result_ord = dict(sorted(result.items(), key=lambda x: x[1], reverse=True))
+
     # print total amount
-    print("Amount available: ", result[0] + result[1])
+    print("Amount available: ", sum(result_ord.values()))
     # print list of items
     print("Location:")
     for item in result_dict:
         print(
-            f"""- Warehouse {item["location"]} (in stock for {item["days"]})""")
+            f"""- Warehouse {item["location"]} (in stock for {item["days"]}) days""")
     # evaluationg warehouses availability
-    total = result[0] + result[1]
-    if result[0] == 0 and result[1] == 0:
+    total = sum(result_ord.values())
+    if total == 0:
         print(f"""Location: Not in stock
 """)
         {farewell(username)}
-        exit()
-    elif result[0] == 0 and result[1] > 0:
-        print(f"""Location: Warehouse 2
-""")
-        return total
-    elif result[0] > 0 and result[1] == 0:
-        print(f"""Location: Warehouse 1""")
-        return total
-    elif result[0] > 0 and result[1] > 0:
-        print(f"""Location: Both warehouses""")
-        if result[0] > result[1]:
-            print(f"Maximum availability: {result[0]} in Warehouse 1")
-        elif result[0] == result[1]:
-            print(f"Maximum availability: {result[1]} in both Warehouses")
-        else:
-            print(f"Maximum availability: {result[1]} in Warehouse 2")
-        return total
+
+    else:
+        max_avail = list(result_ord.keys())[0]
+        print(
+            f"Maximum availability: {result_ord[max_avail]} in Warehouse {max_avail}")
+    return total
+
 
 # Order processing
 
 
-def order(val):
+def order_sel(val: int):
     order_sel = input("Would you like to order this item?(y/n): ")
     if order_sel == "n":
-        print(f"Thank you for your visit, {username}!")
+        farewell(username)
     elif order_sel == "y":
-        order_count = int(input("How many would you like?: "))
-        if order_count > val:
-            print(
-                f"There are not this many available. The maximum amount that can be ordered is {val}")
-            max_available_sel = input(
-                "Would you like to order the maximum available?(y/n): ")
-            if max_available_sel == "n":
-                {farewell(username)}
-            elif max_available_sel == "y":
-                print(f"{val} Almost new router have been ordered.")
-        elif order_count < val:
-            print(f"{order_count} Almost new router have been ordered.")
+        order(val)
+
+
+@validator
+def order(val: int):
+    order_count = int(input("How many would you like?: "))
+    if order_count > val:
+        print(
+            f"There are not this many available. The maximum amount that can be ordered is {val}")
+        max_available_sel = input(
+            "Would you like to order the maximum available?(y/n): ")
+        if max_available_sel == "n":
             {farewell(username)}
+        elif max_available_sel == "y":
+            print(f"{val} {item} have been ordered.")
+            {farewell(username)}
+    elif order_count < val:
+        print(f"{order_count} {item} have been ordered.")
+        {farewell(username)}
+
 
 # Farewell
 
 
 def farewell(name):
+    continue_interaction = input(
+        f"{name} do you want to perform another operation?(y/n): ")
+    if continue_interaction == "y":
+        initial_interaction(username)
+    else:
+        summary(name)
+        exit()
+
+
+def summary(name):
     print(f"Thank you for your visit, {name}!")
+    print("In this session you have: ")
+    print(f"1. Listed for {total_listed} items")
+    print(f"2. Searched for: ")
+    for items in search_history:
+        print("     -", items)
+    print(f"3. Browsed the category: ")
+    for items in listed_categories:
+        print("     -", items)
 
 
-# Getting username
-username = input("Introduce your name: ")
+total_listed = 0
+# Username
+username = get_user()
 # Caling the initial interaction
 initial_interaction(username)
