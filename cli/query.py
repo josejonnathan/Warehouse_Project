@@ -5,7 +5,7 @@ from datetime import datetime
 # Sumary
 search_history = list()
 listed_categories = list()
-listed_items = 0
+total_listed = 0
 # Item Variable
 item = ''
 
@@ -23,7 +23,7 @@ def validator(func):
             return func(*args, **kwargs)
         else:
             print("Invalid Username or Password, Access Denied")
-            farewell(username, total_listed)
+            farewell(username)
     return wrapper
 
 
@@ -259,18 +259,19 @@ def farewell(name):
 
 
 def summary(name):
-    print(f"Thank you for your visit, {name}!")
-    print("In this session you have: ")
-    print(f"1. Listed for {total_listed} items")
-    print(f"2. Searched for: ")
+    print(f"""Thank you for your visit, {name}!
+        
+In this session you have: 
+    
+1. Listed for {total_listed} items
+2. Searched for:""")
     for items in search_history:
-        print("     -", items)
+        print("     -", items.title())
     print(f"3. Browsed the category: ")
     for items in listed_categories:
         print("     -", items)
 
 
-total_listed = 0
 # Username
 username = get_user()
 # Caling the initial interaction
